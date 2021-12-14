@@ -8,53 +8,83 @@ import VisuallyHidden from '../VisuallyHidden';
 
 const SIZES = {
   small: {
-    '--icon-size': 16,
-    '--font-size': 14 / 16 + 'rem',
-    '--border-size': '1px',
-    '--input-left-margin': '8px',
-    '--stroke-width': 1,
+    iconSize: 16,
+    fontSize: 14 / 16 + 'rem',
+    borderSize: '1px',
+    inputLeftMargin: 8,
+    strokeWidth: 1,
+    inputHeight: 24 / 16 + 'rem',
+    iconTopPosition: '4px',
   },
   large: {
-    '--icon-size': 24,
-    '--font-size': 18 / 16 + 'rem',
-    '--border-size': '2px',
-    '--input-left-margin': '12px',
-    '--stroke-width': 2,
+    iconSize: 24,
+    fontSize: 18 / 16 + 'rem',
+    borderSize: '2px',
+    inputLeftMargin: 12,
+    strokeWidth: 2,
+    inputHeight: 36 / 16 + 'rem',
+    iconTopPosition: '6px',
   },
 };
 
 const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
   const styles = SIZES[size];
 
+  if (!styles) {
+    throw new Error('Styles not found');
+  }
+
   return (
-    <Wrapper style={styles} width={width}>
-      <VisuallyHidden>
-        <label htmlFor="text">Search</label>
-      </VisuallyHidden>
-      <Icon
-        id={icon}
-        size={styles['--icon-size']}
-        strokeWidth={styles['--stroke-width']}
-      ></Icon>
-      <Input id="text" style={styles} placeholder={placeholder}></Input>
+    <Wrapper
+      style={{
+        '--padding-left': styles.inputLeftMargin + styles.iconSize + 'px',
+        '--border-size': styles.borderSize,
+      }}
+      width={width}
+      htmlFor="text"
+    >
+      <VisuallyHidden>{label}</VisuallyHidden>
+      <IconWrapper
+        style={{
+          '--iconTopPosition': styles.iconTopPosition,
+        }}
+      >
+        <Icon
+          id={icon}
+          size={styles.iconSize}
+          strokeWidth={styles.strokeWidth}
+        ></Icon>
+      </IconWrapper>
+      <Input
+        id="text"
+        style={{
+          '--input-left-margin':
+            styles.inputLeftMargin + styles.iconSize + 'px',
+          '--font-size': styles.fontSize,
+          '--height': styles.inputHeight,
+        }}
+        placeholder={placeholder}
+      ></Input>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.label`
   width: ${(p) => p.width}px;
   display: flex;
   border-bottom: var(--border-size) solid ${COLORS.black};
+  position: relative;
 `;
 
 const Input = styled.input`
   width: 100%;
   border: 0;
   padding: 0;
-  margin-left: var(--input-left-margin);
+  padding-left: var(--input-left-margin);
   font-size: var(--font-size);
   font-weight: 700;
   color: ${COLORS.gray700};
+  height: var(--height);
 
   ::placeholder {
     font-weight: 400;
@@ -64,6 +94,15 @@ const Input = styled.input`
   &:hover {
     color: ${COLORS.black};
   }
+
+  &:focus {
+    outline-offset: 4px;
+  }
+`;
+
+const IconWrapper = styled.div`
+  position: absolute;
+  top: var(--iconTopPosition);
 `;
 
 export default IconInput;
