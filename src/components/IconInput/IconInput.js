@@ -103,6 +103,11 @@ const Input = styled.input`
 const IconWrapper = styled.div`
   position: absolute;
   top: var(--iconTopPosition);
+  color: ${COLORS.gray500};
+
+  ${Wrapper}:hover & {
+    color: ${COLORS.black};
+  }
 `;
 
 export default IconInput;
