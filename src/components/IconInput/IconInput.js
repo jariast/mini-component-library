@@ -28,12 +28,15 @@ const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
 
   return (
     <Wrapper style={styles} width={width}>
+      <VisuallyHidden>
+        <label htmlFor="text">Search</label>
+      </VisuallyHidden>
       <Icon
         id={icon}
         size={styles['--icon-size']}
         strokeWidth={styles['--stroke-width']}
       ></Icon>
-      <Input style={styles} placeholder={placeholder}></Input>
+      <Input id="text" style={styles} placeholder={placeholder}></Input>
     </Wrapper>
   );
 };
