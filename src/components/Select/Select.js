@@ -16,7 +16,7 @@ const Select = ({ label, value, onChange, children }) => {
       <StyledSelect>
         <span>{displayedValue}</span>
         <IconWrapper>
-          <Icon id="chevron-down" size="14" strokeWidth="2"></Icon>
+          <Icon id="chevron-down" size="24" strokeWidth="2"></Icon>
         </IconWrapper>
       </StyledSelect>
     </Wrapper>
@@ -25,7 +25,7 @@ const Select = ({ label, value, onChange, children }) => {
 
 const Wrapper = styled.div`
   position: relative;
-  width: fit-content;
+  width: max-content;
 `;
 
 const NaviteSelect = styled.select`
@@ -41,7 +41,7 @@ const StyledSelect = styled.div`
   background-color: ${COLORS.transparentGray15};
   width: fit-content;
   height: 100%;
-  padding: 12px 16px;
+  padding: 12px 52px 12px 16px;
   color: ${COLORS.gray700};
   border-radius: 8px;
 
@@ -55,8 +55,10 @@ const StyledSelect = styled.div`
 `;
 
 const IconWrapper = styled.div`
-  display: inline-block;
-  margin-left: 24px;
+  position: absolute;
+  top: 9px;
+  right: 15px;
+  pointer-events: none;
 `;
 
 export default Select;

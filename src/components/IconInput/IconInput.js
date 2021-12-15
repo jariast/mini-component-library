@@ -71,7 +71,7 @@ const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
 
 const Wrapper = styled.label`
   width: ${(p) => p.width}px;
-  display: flex;
+  display: block;
   border-bottom: var(--border-size) solid ${COLORS.black};
   position: relative;
 `;
